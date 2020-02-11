@@ -220,7 +220,7 @@ export default () => {
 	const form = (
 		<div className="form">
 			<div>
-				<h2>RSVP:</h2><br />
+				<h2>RSVP{attendees.length > 0 ? " Another" : ""}:</h2><br />
 				<label>
 					Hospital Name: 
 					<input onChange={ event => setHospital(event.target.value)} type="text" name="name" placeholder="Hospital Name"/>
