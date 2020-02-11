@@ -1,4 +1,5 @@
 import React from 'react'
+import {Head} from 'react-static'
 import { Root, Routes, addPrefetchExcludes } from 'react-static'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
@@ -72,6 +73,17 @@ addPrefetchExcludes(['dynamic'])
 function App() {
   return (
     <Root>
+      <Head>
+        <meta property="og:locale" content="en_CA" />
+        <meta property="og:title" content="Pain Managment In Dogs & Cats" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Pain Managment In Dogs & Cats" />
+        <meta property="og:description" content="Pain Managment In Dogs & Cats" />
+        <meta property="og:url" content="https://vetoquinol-teamontario.ca" />
+        <meta property="og:image" content="http://vetoquinol-teamontario.ca/images/logo.jpg"/>
+        <meta property="og:image:width" content="1920"/>
+        <meta property="og:image:secure_url" content="https://vetoquinol-teamontario.ca/images/logo.jpg"/>
+      </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
       <div className="content">
