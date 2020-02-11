@@ -75,12 +75,16 @@ const PageContainer = styled.div`
 		width: 100vw;
 		padding: 2rem;
 		label { display: block; }
+		@media( min-width: 770px ) {
+			max-width: 770px;
+		} 
 	}
 	.attendees {
 		padding: 0 2rem;
 	}
 	.plus_container {
 		width: 100%;
+		margin: auto;
 		text-align: center;
 		padding-top: 2rem;
 		p { 
