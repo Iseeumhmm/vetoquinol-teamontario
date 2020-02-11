@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import AttendeeList from '../components/AttendeeList'
 import addClinic from '../components/actions'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 import logo from '../images/logo.png'
 import food from '../images/food.jpg'
 import golf from '../images/Golf_Logo.png'
 
+const animateAttendee = keyframes`
+0% 		{height: 0;}
+100%	{height: 100%;}
+`
+
 const PageContainer = styled.div`
+	position: relative;
 	width: 100vw;
 	height: auto;
 	margin: auto;
@@ -77,6 +83,7 @@ const PageContainer = styled.div`
 		}  
 	}
 	.form {
+		position: relative;
 		display: flex;
 		flex-flow: column nowrap;
 		justify-content: center;
@@ -91,26 +98,35 @@ const PageContainer = styled.div`
 		@media( min-width: 770px ) {
 			max-width: 770px;
 		} 
+		
 	}
 	.attendees {
-		padding: 0 2rem;
+		animation: ${animateAttendee} 1s ease-in-out forwards;
+		padding: 2rem 2rem 0;
 	}
 	.btn {
 		position: relative;
 		left: 50%;
 		transform: translateX(-50%);
 		font-weight: bold;
-		color: ${ ({theme: { colorHighlight }}) => colorHighlight };
-		border: 2px solid ${ ({theme: { colorHighlight }}) => colorHighlight };
+		
 		background-color: transparent;
 		border-radius: 5px;
 		margin-top: 2rem;
 		padding: 5px 10px;
+		
 		&.large {
 			font-size: 2rem;
-			color: ${ ({theme: { colorBase }}) => colorBase };
-			border: 2px solid ${ ({theme: { colorBase }}) => colorBase };
+			color: ${ ({theme: { colorWhite }}) => colorWhite };
+			background-color: ${ ({theme: { colorBase }}) => colorBase };
+			border: none;
 			margin-bottom: 2rem;
+			&:hover {
+			transform: translateX(-50%) scale(1.1);
+		}
+			&.add {
+				background-color: ${ ({theme: { colorHighlight }}) => colorHighlight };
+			}
 		}
 	}
 	.thanks {
@@ -120,6 +136,16 @@ const PageContainer = styled.div`
 		align-items: center;
 		justify-content: center;
 		text-align: center;
+	}
+	a {
+		position: absolute;
+		width: auto;
+		left: 50%;
+		bottom: 0;
+		font-size: 1rem;
+		text-align: center;
+		transform: translateX(-50%);
+		color: ${ ({theme: { colorBlack }}) => colorBlack };
 	}
 `
 
@@ -170,11 +196,18 @@ export default () => {
 			console.log('rejected')
 		}
 	}
+	const attendeeContainer = (
+		<div className="attendees">
+			<h2>Attendees:</h2>
+			<AttendeeList list={attendees} />
+			{formSubmitted ? "" : <button className="btn large" onClick={addToDatabase}>Submit</button>}
+		</div>
+	)
 
 	const form = (
 		<div className="form">
 			<div>
-				<h2>RSVP below:</h2><br />
+				<h2>RSVP:</h2><br />
 				<label>
 					Hospital Name: 
 					<input onChange={ event => setHospital(event.target.value)} type="text" name="name" placeholder="Hospital Name"/>
@@ -191,7 +224,7 @@ export default () => {
 					<option value="Vegetarian">Vegetarian</option>
 				</select>
 				<div>
-					<button className="btn" onClick={addAttendee}>Add</button>
+					<button className="btn large add" onClick={addAttendee}>Add</button>
 				</div>
 			</div>
 		</div>
@@ -222,12 +255,9 @@ export default () => {
 				</div>
 				<img src={golf} alt="Victoria East Logo " />
 			</div>
+			{attendees.length > 0 ? attendeeContainer : null}
 			{formSubmitted ? thankYou : form}
-			<div className="attendees">
-				<p>Attendees:</p>
-				<AttendeeList list={attendees} />
-				<button className="btn large" onClick={addToDatabase}>Submit</button>
-			</div>
+			<a href="tel: 5196354394">Questions contact Marcy Heffren<br /> (519) 635-4394</a>
 		</PageContainer>
 		)
 }

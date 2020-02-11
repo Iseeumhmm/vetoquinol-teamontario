@@ -34,4 +34,12 @@ export default {
     require.resolve('react-static-plugin-reach-router'),
     require.resolve('react-static-plugin-sitemap'),
   ],
+  webpack: (config, { stage }) => {
+    if (stage === 'prod') {
+      config.entry = ['babel-polyfill', config.entry]
+    } else if (stage === 'dev') {
+      config.entry = ['babel-polyfill', ...config.entry]
+    }
+    return config
+  },
 }
