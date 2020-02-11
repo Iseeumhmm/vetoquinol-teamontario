@@ -80,9 +80,9 @@ function App() {
         <meta property="og:site_name" content="Pain Managment In Dogs & Cats" />
         <meta property="og:description" content="Pain Managment In Dogs & Cats" />
         <meta property="og:url" content="https://vetoquinol-teamontario.ca" />
-        <meta property="og:image" content="http://vetoquinol-teamontario.ca/images/logo.jpg"/>
+        <meta property="og:image" content="http://vetoquinol-teamontario.ca/images/logo2.jpg"/>
         <meta property="og:image:width" content="1920"/>
-        <meta property="og:image:secure_url" content="https://vetoquinol-teamontario.ca/images/logo.jpg"/>
+        <meta property="og:image:secure_url" content="https://vetoquinol-teamontario.ca/images/logo2.jpg"/>
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
