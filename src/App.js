@@ -75,7 +75,7 @@ function App() {
     <Root>
       <Head>
         <meta property="og:locale" content="en_CA" />
-        <meta property="og:title" content="Pain Managment In Dogs & Cats" />
+        <meta property="og:title" content="Dr. Janice Huntingford DVM, DACVSMR, CVA, CVPP, CCRT CAVCA" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Pain Managment In Dogs & Cats" />
         <meta property="og:description" content="Pain Managment In Dogs & Cats" />
