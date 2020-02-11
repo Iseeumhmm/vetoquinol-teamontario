@@ -92,16 +92,17 @@ const PageContainer = styled.div`
 		padding: 2rem;
 		label { 
 			display: block; 
-			font-size: 2rem;
+			font-size: 1.6rem;
 			}
 		input {
 			outline: none;
 			border: none;
-			font-size: 2rem;
+			font-size: 1.6rem;
 			margin-left: 1rem;
 		}
 		select {
 			margin-left: 1rem;
+			font-size: 1.6rem;
 		}
 		@media( min-width: 770px ) {
 			max-width: 770px;
@@ -122,7 +123,7 @@ const PageContainer = styled.div`
 		border-radius: 5px;
 		margin-top: 2rem;
 		padding: 5px 10px;
-		
+		margin-bottom: 2rem;
 		&.large {
 			font-size: 2rem;
 			color: ${ ({theme: { colorWhite }}) => colorWhite };
@@ -145,15 +146,19 @@ const PageContainer = styled.div`
 		justify-content: center;
 		text-align: center;
 	}
+	.contact {
+		width: 100%;
+		text-align: center;
+	}
 	a {
-		position: absolute;
 		width: auto;
-		left: 50%;
-		bottom: 0;
 		font-size: 1rem;
 		text-align: center;
 		transform: translateX(-50%);
 		color: ${ ({theme: { colorBlack }}) => colorBlack };
+		&:hover {
+			color: ${ ({theme: { colorBlack }}) => colorBlack };
+		}
 	}
 `
 
@@ -265,7 +270,9 @@ export default () => {
 			</div>
 			{attendees.length > 0 ? attendeeContainer : null}
 			{formSubmitted ? thankYou : form}
-			<a href="tel: 5196354394">Questions contact Marcy Heffren<br /> (519) 635-4394</a>
+			<div className="contact">
+				<a href="tel: 5196354394">Questions contact Marcy Heffren<br /> (519) 635-4394</a>
+			</div>
 		</PageContainer>
 		)
 }

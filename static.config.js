@@ -2,14 +2,7 @@ import React from 'react'
 import path from 'path'
 
 export default {
-  // webpack: (config, { stage }) => {
-  //   if (stage === 'prod') {
-  //     config.entry = ['core-js/stable', config.entry]
-  //   } else if (stage === 'dev') {
-  //     config.entry = ['core-js/stable', ...config.entry]
-  //   }
-  //   return config
-  // },
+  
   Document: ({ Html, Head, Body, children, siteData, renderMeta }) => (
     <Html>
       <Head>
