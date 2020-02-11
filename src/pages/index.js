@@ -4,7 +4,7 @@ import addClinic from '../components/actions'
 import styled from 'styled-components'
 import logo from '../images/logo.png'
 import food from '../images/food.jpg'
-import plus from '../images/plus.png'
+import golf from '../images/Golf_Logo.png'
 
 const PageContainer = styled.div`
 	width: 100vw;
@@ -19,7 +19,6 @@ const PageContainer = styled.div`
 		flex-flow: column nowrap;
 		align-items: center;
 		justify-content:center;
-		height: 25rem;
 		text-align: center;
 		h1, p {
 			color: ${ ({theme: { colorDarkGrey }}) => colorDarkGrey };
@@ -40,7 +39,17 @@ const PageContainer = styled.div`
 		background-image: url(${food});
 		background-size: cover;
 		background-position: bottom center;
-		height: 40rem;
+		height: 44.5rem;
+		img {
+			float: right;
+			width: 15rem;
+			position: relative;
+			right: 1rem;
+			top: 1rem;
+		}
+		@media( min-width: 445px ) {
+			height: 65.5rem;
+		}
 	}
 	.date_inner {
 		position: relative;
@@ -51,8 +60,8 @@ const PageContainer = styled.div`
 		text-align: center;
 		color: ${ ({theme: { colorWhite }}) => colorWhite };
 		width: 100vw;
-		height: 15.4rem;
-		background-color: rgba(108,165,28, .8);
+		height: 18.5rem;
+		background-color: rgba(44,136,52, .7);
 		span { 
 			font-weight: bold;
 			font-size: 2rem;
@@ -71,10 +80,14 @@ const PageContainer = styled.div`
 		display: flex;
 		flex-flow: column nowrap;
 		justify-content: center;
-		height: 15.4rem;
+		height: 30rem;
 		width: 100vw;
 		padding: 2rem;
 		label { display: block; }
+		input {
+			outline: none;
+			border: none;
+		}
 		@media( min-width: 770px ) {
 			max-width: 770px;
 		} 
@@ -82,31 +95,13 @@ const PageContainer = styled.div`
 	.attendees {
 		padding: 0 2rem;
 	}
-	.plus_container {
-		width: 100%;
-		margin: auto;
-		text-align: center;
-		padding-top: 2rem;
-		p { 
-			position: relative;
-			top: -8px;
-			font-size: 1rem; 
-			color: ${ ({theme: { colorHighlight }}) => colorHighlight };
-		}
-		@media( min-width: 770px ) {
-			max-width: 770px;
-		}  
-	}
-	.plus {
-		width: 2rem;
-	}
 	.btn {
 		position: relative;
 		left: 50%;
 		transform: translateX(-50%);
 		font-weight: bold;
 		color: ${ ({theme: { colorHighlight }}) => colorHighlight };
-		border: 1px solid ${ ({theme: { colorHighlight }}) => colorHighlight };
+		border: 2px solid ${ ({theme: { colorHighlight }}) => colorHighlight };
 		background-color: transparent;
 		border-radius: 5px;
 		margin-top: 2rem;
@@ -118,6 +113,14 @@ const PageContainer = styled.div`
 			margin-bottom: 2rem;
 		}
 	}
+	.thanks {
+		width: 100%;
+		height: 30rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
 `
 
 export default () => {
@@ -125,6 +128,8 @@ export default () => {
 	const [ dinner, setDinner ] = useState(null)
 	const [ hospital, setHospital ] = useState(null)
 	const [ attendees, setAttendees ] = useState([])
+	const [ formSubmitted, setFormSubmitted ] = useState(false)
+
 
 	const addAttendee = () => {
 		let store = attendees
@@ -147,51 +152,77 @@ export default () => {
 		document.querySelector('#name').value = ''
 	}
 	const addToDatabase = () => {
-		const clinic = {
-			hospital : hospital,
-			attendees: attendees
+		if ( attendees.length < 1 ) {
+			alert('Please fill out all fields')
+			return 
 		}
-		addClinic(clinic)
-		console.log('almost sent')
+		if (confirm("Submit your list?")) {
+			setFormSubmitted(true)
+			if (name) {
+				addAttendee()
+			}
+			const clinic = {
+				hospital : hospital,
+				attendees: attendees
+			}
+			addClinic(clinic)
+		} else {
+			console.log('rejected')
+		}
 	}
+
+	const form = (
+		<div className="form">
+			<div>
+				<h2>RSVP below:</h2><br />
+				<label>
+					Hospital Name: 
+					<input onChange={ event => setHospital(event.target.value)} type="text" name="name" placeholder="Hospital Name"/>
+				</label>
+				<label>
+					Your Name: 
+					<input id="name" onChange={ event => setName(event.target.value)} type="text" name="name" placeholder="Full Name"/>
+				</label>
+				<label style={{ display: 'inline-block' }} htmlFor="meals">Choose your dinner: </label>
+				<select onChange={ event => setDinner(event.target.value)} defaultValue={'default'} id="meals">
+					<option value="default" disabled>Select your option</option>
+					<option value="Chicken">Chicken</option>
+					<option value="Beef">Beef</option>
+					<option value="Vegetarian">Vegetarian</option>
+				</select>
+				<div>
+					<button className="btn" onClick={addAttendee}>Add</button>
+				</div>
+			</div>
+		</div>
+	)
+
+	const thankYou = (
+		<div className="thanks">
+			<h1>Thank You<br />< br />See you there!</h1>
+		</div>
+	)
+
 	return (
 		<PageContainer>
 			<div className="header">
 				<img src={logo} alt="logo" />
-				<p>Presents</p>
-				<h1>Managment of pain<br /> in cats and dogs</h1>
+				<p>Is pleased to present</p>
+				<h1>Dr. Janice Huntingford DVM, DACVSMR, CVA, CVPP, CCRT CAVCA</h1>
+				<p>Managment of Pain<br /> in geriatric cats and dogs</p>
 			</div>
 			<div className="date">
 				<div className="date_inner">
-					<h2>Feb 28, 2020</h2>
+					<h2>Victoria Park East Golf Club</h2>
+					<p>Feb 28, 2020</p>
 					<p>5:30pm - 8:00pm <br />
+					1096 Victoria Rd. South, Guelph<br />
 					<span>Dinner at 6</span>
 					</p>
 				</div>
+				<img src={golf} alt="Victoria East Logo " />
 			</div>
-			<div className="form">
-				<div>
-					<label>
-						Hospital Name: 
-						<input onChange={ event => setHospital(event.target.value)} type="text" name="name" placeholder="Hospital Name"/>
-					</label>
-					<label>
-						Your Name: 
-						<input id="name" onChange={ event => setName(event.target.value)} type="text" name="name" placeholder="Full Name"/>
-					</label>
-					<label style={{ display: 'inline-block' }} htmlFor="meals">Choose your dinner: </label>
-					<select onChange={ event => setDinner(event.target.value)} defaultValue={'default'} id="meals">
-						<option value="default" disabled>Select your option</option>
-						<option value="Chicken">Chicken</option>
-						<option value="Beef">Beef</option>
-						<option value="Vegetarian">Vegetarian</option>
-					</select>
-					<div className="plus_container">
-						<img onClick={addAttendee} className="plus" src={plus} alt="plus button" />
-						<p>Add</p>
-					</div>
-				</div>
-			</div>
+			{formSubmitted ? thankYou : form}
 			<div className="attendees">
 				<p>Attendees:</p>
 				<AttendeeList list={attendees} />
