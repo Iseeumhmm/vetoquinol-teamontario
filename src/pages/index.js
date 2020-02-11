@@ -90,10 +90,18 @@ const PageContainer = styled.div`
 		height: 30rem;
 		width: 100vw;
 		padding: 2rem;
-		label { display: block; }
+		label { 
+			display: block; 
+			font-size: 2rem;
+			}
 		input {
 			outline: none;
 			border: none;
+			font-size: 2rem;
+			margin-left: 1rem;
+		}
+		select {
+			margin-left: 1rem;
 		}
 		@media( min-width: 770px ) {
 			max-width: 770px;
