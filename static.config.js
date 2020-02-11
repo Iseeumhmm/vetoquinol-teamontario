@@ -2,17 +2,18 @@ import React from 'react'
 import path from 'path'
 
 export default {
-  webpack: (config, { stage }) => {
-    if (stage === 'prod') {
-      config.entry = ['@babel/polyfill', config.entry]
-    } else if (stage === 'dev') {
-      config.entry = ['@babel/polyfill', ...config.entry]
-    }
-    return config
-  },
+  // webpack: (config, { stage }) => {
+  //   if (stage === 'prod') {
+  //     config.entry = ['core-js/stable', config.entry]
+  //   } else if (stage === 'dev') {
+  //     config.entry = ['core-js/stable', ...config.entry]
+  //   }
+  //   return config
+  // },
   Document: ({ Html, Head, Body, children, siteData, renderMeta }) => (
     <Html>
       <Head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.8.3/polyfill.min.js" />
         <meta charSet="UTF-8" />
         < meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
