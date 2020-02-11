@@ -127,14 +127,14 @@ const PageContainer = styled.div`
 		&.large {
 			font-size: 2rem;
 			color: ${ ({theme: { colorWhite }}) => colorWhite };
-			background-color: ${ ({theme: { colorBase }}) => colorBase };
+			background-color: ${ ({theme: { colorHighlight }}) => colorHighlight };
 			border: none;
 			margin-bottom: 2rem;
 			&:hover {
 			transform: translateX(-50%) scale(1.1);
 		}
 			&.add {
-				background-color: ${ ({theme: { colorHighlight }}) => colorHighlight };
+				background-color: ${ ({theme: { colorBase }}) => colorBase };
 			}
 		}
 	}
